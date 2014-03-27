@@ -608,7 +608,7 @@
         <para>
             <itemizedlist>
                 <listitem>
-                    <para>Store a secret</para>
+                    <para>Create a secret</para>
                 </listitem>
                 <listitem>
                     <para>Retrieve secret metadata</para>
@@ -620,10 +620,10 @@
                     <para>Create an order to generate a secret</para>
                 </listitem>
                 <listitem>
-                    <para>Generate an AES key</para>
+                    <para>Retrieve multiple secrets</para>
                 </listitem>
                 <listitem>
-                    <para>Retrieve order status</para>
+                    <para>Retrieve multiple orders</para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -691,11 +691,6 @@
                 the secret metadata. <command>GET</command> requests
                 return only metadata about the secret, and not the
                 decrypted secret information itself. </para>
-            <para>This allows for a more rapid response for large
-                secrets, or large lists of secrets. It also supports
-                multi-part secrets,such as SSL certificates, which may
-                have both a public and private key portion that could
-                be individually retrieved.</para>
             <para>The following example shows how to retrieve secret
                 metadata by submitting a <command>GET</command>
                 request against the endpoint URL with the <emphasis
@@ -705,7 +700,8 @@
             <para>
                 <programlisting>curl -H 'Accept: application/json' https://&lt;endpointURL>/v1/&lt;tenantId>secrets/&lt;secretId></programlisting>
             </para>
-            <para>You will receive a response like the following:
+            <para>If the call is successful, you will receive a
+                response like the following:
                 <programlisting>
 {
   "status": "ACTIVE",
@@ -724,11 +720,9 @@
         </section>
         <section xml:id="Create_a_Secret">
             <title>Creating an Order to Generate a Secret</title>
-            <para>To generate a secret, you need to use the orders
-                resource, which is described in more detail in the
-                Barbican Developer Guide. You use the orders resource
-                to generate an order, which will then generate a
-                secret.</para>
+            <para>You can also use the orders resource to generate a
+                secret. The ordering object encapsulates the workflow
+                and history for the creation of a secret. </para>
             <para>To generate an order, complete the following
                 steps:</para>
             <para>
@@ -742,8 +736,9 @@
                         </para>
                     </listitem>
                     <listitem>
-                        <para>You will receive a response like the
-                            following. Make sure to note the <emphasis
+                        <para>If the call is successful, you will
+                            receive a response like the following.
+                            Make sure to note the <emphasis
                                 role="italic">orderId</emphasis> that
                             is returned in the URL. You will use this
                             id for the next request.</para>
@@ -761,10 +756,11 @@
                         </para>
                     </listitem>
                     <listitem>
-                        <para>The call will return a response like the
-                            following. Make sure to note the <emphasis
-                                role="italic">secretId </emphasis>that
-                            is returned in the URL.</para>
+                        <para>If the call is successful, it will
+                            return a response like the following. Make
+                            sure to note the <emphasis role="italic"
+                                >secretId </emphasis>that is returned
+                            in the URL.</para>
                         <para>
                             <programlisting language="json"><xi:include href="./samples/resCreateSecret.json" parse="text"/></programlisting>
                         </para>
@@ -778,8 +774,9 @@
                         </para>
                     </listitem>
                     <listitem>
-                        <para>This call will return a response like
-                            the following:</para>
+                        <para>If the call is successful, it will
+                            return a response like the
+                            following:</para>
                         <para>
                             <programlisting language="json"><xi:include href="./samples/resRetrieveSecret.json" parse="text"/></programlisting>
                         </para>
@@ -789,15 +786,15 @@
         </section>
         <section xml:id="Generate_an_AES_Key">
             <title>Retrieving Multiple Secrets</title>
-            <para>The following example shows how to create a secret
-                in the form of an AES key by typing the following at a
-                command line-interface:</para>
+            <para>You can retrieve multiple secrets that have been
+                generated for a given tenant by typing the following
+                at a command-line interface:</para>
             <para>
                 <programlisting>curl -H 'Accept: application/JSON' &lt;http://&lt;endpointURL>v1/&lt;tenantId>/secrets</programlisting>
             </para>
-            <para>You will receive an intelligible response like the
-                following:
-                <programlisting>{
+            <para>If the call is successful, you will receive a
+                response like the
+                following:<programlisting>{
     "secrets": [
         {
             "status": "ACTIVE",
@@ -941,15 +938,14 @@
         </section>
         <section xml:id="Retrieve_Order_Status">
             <title>Retrieving Multiple Orders</title>
-            <para>After you have generated a secret, you need to
-                verify that you can retrieve and view the
-                secret.</para>
-            <para>To view the secret in the format of random bytes,
-                type the following at a command line-interface:</para>
+            <para>You can also retreive multiple orders that have been
+                generated for a given tenant by typing the following
+                at a command-line interface:</para>
             <para>
                 <programlisting>curl -H 'Accept: application/JSON' &lt;http://&lt;endpointURL>v1/&lt;tenantId>/orders        </programlisting>
             </para>
-            <para>You will receive response like the
+            <para>If the call is successful, you will receive a
+                response like the
                 following:<programlisting>{
     "total": 15,
     "orders": [
@@ -1111,7 +1107,15 @@
     </chapter>
     <chapter xml:id="Barbican_Next_Steps">
         <title>Next Steps</title>
-        <para>To learn more details about the Barbican API, please
-            read the Barbican API Developer Guide.</para>
+        <para>To learn more details about the Barbican API, do the
+            following:</para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para>Read the Rackspace Barbican API Developer
+                        Guide</para>
+                </listitem>
+            </itemizedlist>
+        </para>
     </chapter>
 </book>
