@@ -454,8 +454,8 @@
             in each Barbican API request. </para>
         <para>Examples 4.1 and 4.2 demonstrate how to use cURL to
             obtain the authentication token and your account number.
-            You must provide both when making subsequent Cloud Feeds
-            API requests.</para>
+            You must provide both when making subsequent Barbican API
+            requests.</para>
         <para>Remember to replace the placeholder names in the
             following authentication request examples with your
                 information:<itemizedlist spacing="compact">
@@ -940,18 +940,172 @@
             </para>
         </section>
         <section xml:id="Retrieve_Order_Status">
-            <title>Retrieving an Order</title>
+            <title>Retrieving Multiple Orders</title>
             <para>After you have generated a secret, you need to
                 verify that you can retrieve and view the
                 secret.</para>
             <para>To view the secret in the format of random bytes,
                 type the following at a command line-interface:</para>
             <para>
-                <programlisting>curl -H 'Accept: application/octet-stream' &lt;secret_ref id from the previous call></programlisting>
+                <programlisting>curl -H 'Accept: application/JSON' &lt;http://&lt;endpointURL>v1/&lt;tenantId>/orders        </programlisting>
             </para>
-            <para>You will receive an intelligible response like the
-                following:
-                <programlisting>�l6[F���#��r�|gd�fe~���</programlisting>
+            <para>You will receive response like the
+                following:<programlisting>{
+    "total": 15,
+    "orders": [
+        {
+            "status": "PENDING",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/????",
+            "updated": "2014-03-19T22:40:06.720872",
+            "created": "2014-03-19T22:40:06.720860",
+            "secret": {
+                "name": "secretname",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 256,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/94ade532-9657-41e1-87ae-c8cbdfa836e0"
+        },
+        {
+            "status": "ACTIVE",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/f5de8592-6c62-4964-827c-a716a4a18689",
+            "updated": "2014-03-19T22:40:14.741733",
+            "created": "2014-03-19T22:40:14.646766",
+            "secret": {
+                "name": "secretname",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 256,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/30e10d2c-9669-435b-9b0e-2da39e87ef14"
+        },
+        {
+            "status": "ACTIVE",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/54bf3411-0765-467c-ba76-ba96c527e990",
+            "updated": "2014-03-19T22:40:17.123875",
+            "created": "2014-03-19T22:40:17.049563",
+            "secret": {
+                "name": "secretname",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 256,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/770f8e87-867d-47b1-b36c-2d9b78103c73"
+        },
+        {
+            "status": "ACTIVE",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/cfe0210c-8a4d-4214-8982-30fc3bab6bb5",
+            "updated": "2014-03-19T22:40:42.790917",
+            "created": "2014-03-19T22:40:42.717171",
+            "secret": {
+                "name": "secretname",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 256,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/9f5eef54-d3f5-461f-a143-e8ab1398497a"
+        },
+        {
+            "status": "ACTIVE",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/40ecc46a-f6fc-4009-93da-a137027e4c2c",
+            "updated": "2014-03-19T22:40:54.320625",
+            "created": "2014-03-19T22:40:54.245305",
+            "secret": {
+                "name": "secretname",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 128,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/ac3efc51-f23c-4592-b132-1ae2daa4b123"
+        },
+        {
+            "status": "ACTIVE",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/b8cfb4f0-854c-4d6b-bc4f-9406d676b0b2",
+            "updated": "2014-03-19T22:40:58.600055",
+            "created": "2014-03-19T22:40:58.526367",
+            "secret": {
+                "name": "~!@#$%^&amp;*()_+`-={}[]|:;&lt;>,.?\"",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 256,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/bc1f3bfc-cb3f-405b-a762-6c7b02fa2a1b"
+        },
+        {
+            "status": "PENDING",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/????",
+            "updated": "2014-03-19T22:40:59.463301",
+            "created": "2014-03-19T22:40:59.463286",
+            "secret": {
+                "name": "3a228202-cdd5-425d-8515-9b42d1a00e5a",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 256,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/af856f60-8a95-4f90-984e-f4a67698d226"
+        },
+        {
+            "status": "PENDING",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/????",
+            "updated": "2014-03-19T22:41:18.930095",
+            "created": "2014-03-19T22:41:18.930081",
+            "secret": {
+                "name": "secretname",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 256,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/50212509-9c87-4a71-be3e-9ad59c290ede"
+        },
+        {
+            "status": "ACTIVE",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/493f21dc-4442-4f95-b24f-4828809247f4",
+            "updated": "2014-03-19T23:22:32.785610",
+            "created": "2014-03-19T23:22:32.724647",
+            "secret": {
+                "name": "secretname",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 256,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/351a6595-76be-4a1a-a153-99e0a8d12b26"
+        },
+        {
+            "status": "ACTIVE",
+            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/6e0bfe9f-8a59-4e29-81af-ea57eec96f28",
+            "updated": "2014-03-25T16:42:20.584453",
+            "created": "2014-03-25T16:42:20.430822",
+            "secret": {
+                "name": "secretname",
+                "algorithm": "aes",
+                "payload_content_type": "application/octet-stream",
+                "expiration": null,
+                "bit_length": 256,
+                "mode": "cbc"
+            },
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/488cd596-f1a6-4abe-8cb0-16608f5b0359"
+        }
+    ],
+    "next": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders?limit=10&amp;offset=10"
+}</programlisting>
             </para>
         </section>
     </chapter>
