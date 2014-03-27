@@ -1,4 +1,4 @@
-curl -X POST -d \
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d \
  '{
    "secret":
 	       {
@@ -9,4 +9,4 @@ curl -X POST -d \
 		 "payload_content_type": "application/octet-stream"
 		}
 }'\
-http://localhost:9311/v1/12345/orders
+http://<endpointURL>/v1/<tenantId>/orders

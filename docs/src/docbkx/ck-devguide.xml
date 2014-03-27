@@ -513,6 +513,83 @@ config at https://github.com/rackerlabs/autoscaling-chef/blob/master/site-cookbo
     </section>
   </chapter>
 <!--  <xi:include href="./chapters/rbac.xml"/>-->
+  <chapter xml:id="Integration_Environment">
+    <title>Integration Environment</title>
+    <para>We have set up an <emphasis role="bold"
+      >insecure</emphasis> integration environment at <link
+        xlink:href="http://iad-int-api.cloudkeep.io:9311"
+        >http://iad-int-api.cloudkeep.io:9311</link> so that
+      you can try the Barbican API without having to install and
+      configure it first. </para>
+    <para>
+      <warning>
+        <para>This endpoint is provided for evaluation
+          purposes only, with no attempt made to secure or
+          persist data stored therein. Therefore, please do
+          not store any data that is sensitive, critical or
+          that you otherwise care about.</para>
+      </warning>
+    </para>
+    <para>
+      <note>
+        <para> Authentication is currently turnd off or the
+          integration environment. </para>
+      </note>
+    </para>
+    <section xml:id="Obtaining_Barbican_Version_Resource">
+      <title>Obtaining a Barbican Version Resource</title>
+      <para>First, you need to generate a valid token on
+        keystone. The integration environment provides a
+        Keystone server at http://keystone-int.cloudkeep.io as
+        shown in the following example:</para>
+      <para>
+        <programlisting language="json"><xi:include href="../wadl/samples/reqGenerateToken.json" parse="text"/></programlisting>
+      </para>
+      <para>If successful, this request will return the
+        following response, which contains the token
+        information:</para>
+      <programlisting language="json"><xi:include href="./samples/resgenerateToken.json" parse="text"/></programlisting>
+      <para>From the response you need to record the following
+        two values:</para>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="italic">Token
+              id</emphasis>, which is
+              39a8b7f62dcb4095a74a4e65a68c85d8 in the
+              example above.</para>
+          </listitem>
+          <listitem>
+            <para><emphasis role="italic">Tenant
+              id</emphasis>, which is
+              0239200f037f4520aadd9791fad19af8 in the
+              example above.</para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        <note>
+          <para>For PKI-authenticated Keystone
+            configurations, the token id value will be
+            much larger.</para>
+        </note>
+      </para>
+      <para>After you have obtained the token, you can use it to
+        make a requests to the Barbican API using the
+        integration environment. The following example shows
+        how to make a request for version information from
+        Barbican:</para>
+      <para>
+        <programlisting language="json"><xi:include href="./samples/reqgetversioninfo.json" parse="text"/></programlisting>
+      </para>
+      <para>If successful, the above command will return version
+        information for Barbican as shown in the following
+        example:</para>
+      <para>
+        <programlisting language="json"><xi:include href="./samples/resgetversioninfo.json" parse="text"/></programlisting>
+      </para>
+    </section>
+  </chapter>
   <chapter xml:id="Barbican_API_Overview">
     <title>General API Information</title>
     <section xml:id="Secrets_Resource">
