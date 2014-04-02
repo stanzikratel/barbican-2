@@ -644,8 +644,8 @@
                 <orderedlist>
                     <listitem>
                         <para>Upload a plain-text order by submitting
-                            a POST request as shown in the following
-                            example:</para>
+                            a <command>POST</command> request as shown
+                            in the following example:</para>
                         <para>
                             <programlisting language="json"><xi:include href="./samples/reqCreateOrder.json" parse="text"/></programlisting>
                         </para>
@@ -653,13 +653,13 @@
                     <listitem>
                         <para>If the call is successful, you will
                             receive a response like the following.
-                            Make sure to note the <emphasis
+                            Make sure to record the <emphasis
                                 role="italic">orderId</emphasis> that
                             is returned in the response. You will use
                             this id for the next request.</para>
                         <para>
                             <programlisting> {"order_ref":
-      "http://&lt;endpointURL>/v1/&lt;tenantId>/orders/62d57f53-ecfe-4ae4-87bd-fab2f24e29bc"} </programlisting>
+      "http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/orders/62d57f53-ecfe-4ae4-87bd-fab2f24e29bc"} </programlisting>
                         </para>
                     </listitem>
                     <listitem>
@@ -673,7 +673,7 @@
                     <listitem>
                         <para>If the call is successful, it will
                             return a response like the following. Make
-                            sure to note the <emphasis role="italic"
+                            sure to record the <emphasis role="italic"
                                 >secretId </emphasis>that is returned
                             in the response.</para>
                         <para>
@@ -685,7 +685,7 @@
                             secret by typing the following at a
                             command-line interface:</para>
                         <para>
-                            <programlisting>curl -H 'Accept: application/json' &lt;http://&lt;endpointURL>v1/&lt;tenantId>/secrets/&lt;secretId></programlisting>
+                            <programlisting>curl -H 'Accept: application/json' &lt;http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/&lt;<emphasis role="italic">secretId</emphasis>></programlisting>
                         </para>
                     </listitem>
                     <listitem>
@@ -702,8 +702,61 @@
                 </orderedlist>
             </para>
         </section>
+        <section xml:id="Retrieve_Order_Status">
+            <title>Retrieving Order Status</title>
+            <para>You can submit a <command>GET</command> request to
+                retrieve the status of an order. The status of an
+                order can be one of the following: ACTIVE, PENDING, or
+                ERROR. </para>
+            <para>To retrieve the order status, type the following at
+                a command-line interface:</para>
+            <para>
+                <programlisting>curl -H 'Accept: application/json' &lt;http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId></emphasis>/orders/&lt;<emphasis role="italic">orderId</emphasis>></programlisting>
+            </para>
+            <para>The following example shows an order with an ACTIVE
+                status:
+                <programlisting>{
+    "status": "ACTIVE",
+    "secret_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/secrets/8a78d5e4-524a-4e81-96cc-c7d16ed85515",
+    "updated": "2014-04-02T14:52:26.987458",
+    "created": "2014-04-02T14:52:26.921043",
+    "secret": {
+        "name": "secretname",
+        "algorithm": "aes",
+        "payload_content_type": "application/octet-stream",
+        "expiration": null,
+        "bit_length": 256,
+        "mode": "cbc"
+         },
+    "order_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/orders/b63d2c05-5d53-4db6-af06-4e388044deb8"
+}</programlisting>The
+                following example shows an order with status set to
+                PENDING:</para>
+            <para><programlisting>{
+     "status": "PENDING",
+     "secret_ref": &lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/????",
+     "updated": "2014-03-19T22:40:06.720872",
+     "created": "2014-03-19T22:40:06.720860",
+     "secret": {
+           "name": "secretname",
+           "algorithm": "aes",
+           "payload_content_type": "application/octet-stream",
+           "expiration": null,
+            "bit_length": 256,
+            "mode": "cbc"
+             },
+            "order_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/orders/94ade532-9657-41e1-87ae-c8cbdfa836e0"
+ }</programlisting></para>
+            <para>The above example shows that in an order with status
+                set to PENDING, no <emphasis role="italic">secretId
+                </emphasis>is returned but instead a series of
+                questions marks:</para>
+            <para>
+                <programlisting>"secret_ref": &lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/????"</programlisting>
+            </para>
+        </section>
         <section xml:id="Store_a_Secret">
-            <title><?sbr?>Storing a Secret</title>
+            <title>Storing a Secret</title>
             <para>You can use the secrets resource to store a secret
                 in the databse.</para>
             <para>You can store secrets using one of the 2
@@ -755,9 +808,9 @@
                 <programlisting language="json"><xi:include href="./samples/reqCreateSecret.json" parse="text"/></programlisting>
             </para>
             <para>If the request is successful, you will receive a
-                response like the following:
-                <programlisting>
-    "secret_ref": "http://&lt;endpointURL>/v1/&lt;tenantId>/secrets/a8957047-16c6-4b05-ac57-8621edd0e9ee"
+                    response like the following:
+                    <programlisting>
+    "secret_ref": "http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/a8957047-16c6-4b05-ac57-8621edd0e9ee"
 }</programlisting></para>
             <para>The example above shows the <emphasis role="italic"
                     >secretId</emphasis>, which will be returned in a
@@ -780,7 +833,7 @@
                     >Accept</emphasis> header set to <emphasis
                     role="italic">application/json</emphasis>.</para>
             <para>
-                <programlisting>curl -H 'Accept: application/json' https://&lt;endpointURL>/v1/&lt;tenantId>secrets/&lt;secretId></programlisting>
+                <programlisting>curl -H 'Accept: application/json' https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>secrets/&lt;<emphasis role="italic">secretId</emphasis>></programlisting>
             </para>
             <para>If the call is successful, you will receive a
                 response like the following: <programlisting>
@@ -795,7 +848,7 @@
     "default": "application/octet-stream"
   },
   "expiration": "2013-05-08T16:21:38.134160",
-  "secret_ref": "http://&lt;endpointURL>/v1/&lt;tenantId>/secrets/888b29a4-c7cf-49d0-bfdf-bd9e6f26d718",
+  "secret_ref": "http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/888b29a4-c7cf-49d0-bfdf-bd9e6f26d718",
 }</programlisting>
                 <note>
                     <para>If you set the <emphasis role="italic"
@@ -815,7 +868,7 @@
                 generated for a given tenant by typing the following
                 at a command-line interface:</para>
             <para>
-                <programlisting>curl -H 'Accept: application/JSON' &lt;http://&lt;endpointURL>v1/&lt;tenantId>/secrets</programlisting>
+                <programlisting>curl -H 'Accept: application/JSON' &lt;http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets</programlisting>
             </para>
             <para>If the call is successful, you will receive a
                 response like the
@@ -823,7 +876,7 @@
     "secrets": [
         {
             "status": "ACTIVE",
-            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/9150d09b-7791-4c2a-90cc-1592e2ff67ac",
+            "secret_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/9150d09b-7791-4c2a-90cc-1592e2ff67ac",
             "updated": "2014-03-19T22:39:55.136579",
             "name": "aes_key",
             "algorithm": "aes",
@@ -837,7 +890,7 @@
         },
         {
             "status": "ACTIVE",
-            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/2e21bffa-2b81-432a-9bcb-2533593bcd34",
+            "secret_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/secrets/2e21bffa-2b81-432a-9bcb-2533593bcd34",
             "updated": "2014-03-19T22:39:56.018075",
             "name": "aes_key",
             "algorithm": "aes",
@@ -851,7 +904,7 @@
         }, 
         {
             "status": "ACTIVE",
-            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/54bf3411-0765-467c-ba76-ba96c527e990",
+            "secret_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/54bf3411-0765-467c-ba76-ba96c527e990",
             "updated": "2014-03-19T22:40:17.100402",
             "name": "secretname",
             "algorithm": "aes",
@@ -865,17 +918,18 @@
         }
     ],
     "total": 84,
-    "next": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets?limit=10&amp;offset=10"
+    "next": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets?limit=10&amp;offset=10"
 }</programlisting>
             </para>
         </section>
         <section xml:id="Retrieve_Multiple_Orders">
             <title>Retrieving Multiple Orders</title>
-            <para>You can also retreive multiple orders that have been
-                generated for a given tenant by typing the following
-                at a command-line interface:</para>
+            <para>You can use a <command>GET</command> request to
+                retrieve multiple orders that have been generated for
+                a given tenant. To do so, type the following at a
+                command-line interface:</para>
             <para>
-                <programlisting>curl -H 'Accept: application/JSON' &lt;http://&lt;endpointURL>v1/&lt;tenantId>/orders        </programlisting>
+                <programlisting>curl -H 'Accept: application/JSON' &lt;http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/orders        </programlisting>
             </para>
             <para>If the call is successful, you will receive a
                 response like the
@@ -884,7 +938,7 @@
     "orders": [
         {
             "status": "PENDING",
-            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/????",
+            "secret_ref": "&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/????",
             "updated": "2014-03-19T22:40:06.720872",
             "created": "2014-03-19T22:40:06.720860",
             "secret": {
@@ -895,11 +949,11 @@
                 "bit_length": 256,
                 "mode": "cbc"
             },
-            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/94ade532-9657-41e1-87ae-c8cbdfa836e0"
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/orders/94ade532-9657-41e1-87ae-c8cbdfa836e0"
         },
         {
             "status": "PENDING",
-            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/????",
+            "secret_ref": "&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/secrets/????",
             "updated": "2014-03-19T22:41:18.930095",
             "created": "2014-03-19T22:41:18.930081",
             "secret": {
@@ -910,11 +964,11 @@
                 "bit_length": 256,
                 "mode": "cbc"
             },
-            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/50212509-9c87-4a71-be3e-9ad59c290ede"
+            "order_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/orders/50212509-9c87-4a71-be3e-9ad59c290ede"
         },
         {
             "status": "ACTIVE",
-            "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/secrets/6e0bfe9f-8a59-4e29-81af-ea57eec96f28",
+            "secret_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/secrets/6e0bfe9f-8a59-4e29-81af-ea57eec96f28",
             "updated": "2014-03-25T16:42:20.584453",
             "created": "2014-03-25T16:42:20.430822",
             "secret": {
@@ -925,10 +979,10 @@
                 "bit_length": 256,
                 "mode": "cbc"
             },
-            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders/488cd596-f1a6-4abe-8cb0-16608f5b0359"
+            "order_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/orders/488cd596-f1a6-4abe-8cb0-16608f5b0359"
         }
     ],
-    "next": "https://ord.keep-verify.api.rackspacecloud.com/v1/545436309/orders?limit=10&amp;offset=10"
+    "next": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/orders?limit=10&amp;offset=10"
 }</programlisting>
             </para>
         </section>
