@@ -758,7 +758,7 @@
         <section xml:id="Store_a_Secret">
             <title>Storing a Secret</title>
             <para>You can use the secrets resource to store a secret
-                in the databse.</para>
+                in the database.</para>
             <para>You can store secrets using one of the 2
                 methods:</para>
             <para>
@@ -799,7 +799,7 @@
                 </note>
             </para>
         <section xml:id="Storing_a_secret_using_POST">
-            <title>Storing a Secret using a POST Request</title>
+            <title>Storing a Secret Using a POST Request</title>
             <para>The following example shows how to generate a secret
                 in the format of an AES key by submitting a
                     <command>POST</command> request wth the secret
@@ -811,10 +811,57 @@
                     response like the following:
                     <programlisting>
     "secret_ref": "http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/a8957047-16c6-4b05-ac57-8621edd0e9ee"
-}</programlisting></para>
+</programlisting></para>
             <para>The example above shows the <emphasis role="italic"
                     >secretId</emphasis>, which will be returned in a
                 successful response.</para>
+                <section xml:id="Storing_a_Secret_using_Put_and_Post">
+                    <title>Storing a Secret Using a POST and PUT
+                        Request</title>
+                    <para>You can store a secret by first submitting a
+                        POST request without specifying the secret
+                        payload and then submitting a subsequent PUT
+                        request with the payload.</para>
+                    <para>To go through this 2-step process of
+                        creating a secret, complete the following
+                        steps:</para>
+                    <para>
+                        <orderedlist>
+                            <listitem>
+                                <para>Submitting a
+                                   <command>POST</command> request
+                                   against the secrets resource
+                                   without any of the payload
+                                   parameters specified as shown in
+                                   the following example.</para>
+                       <para><programlisting language="json"><xi:include href="./samples/reqCreateSecretwithoutPayload.json" parse="text"/></programlisting></para></listitem>
+                            <listitem><para>If the request is successful, you will
+                                receive a response like the following:</para>
+                         <para><programlisting>
+ "secret_ref": "http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/a8957047-16c6-4b05-ac57-8621edd0e9ee"</programlisting></para>
+                            <para>Note the <emphasis role="italic"
+                                   >secretId</emphasis>, which will be
+                                   returned in a successful response.
+                                   You need to pass this secret id in
+                                   the subsequent PUT request.</para></listitem>
+                            <listitem>
+                                <para>Using the <emphasis
+                                   role="italic">secretId
+                                   </emphasis>that you obtained in the
+                                   previous step, submit a
+                                   <command>PUT</command> request
+                                   against the secrets resource with
+                                   the payload parameters specified as
+                                   shown in the following
+                                   example.</para>
+<para><programlisting language="json"><xi:include href="./samples/reqUpdateSecret.json" parse="text"/></programlisting></para>
+                            <para>If the call is successful, the
+                                   <emphasis role="italic"
+                                   >secretId</emphasis> will be
+                                   returned in the response.</para></listitem>
+                        </orderedlist>
+                    </para>
+                </section>
         </section>
         </section>
         <section xml:id="Retrieve_Secret_Metadata">
@@ -836,20 +883,7 @@
                 <programlisting>curl -H 'Accept: application/json' https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>secrets/&lt;<emphasis role="italic">secretId</emphasis>></programlisting>
             </para>
             <para>If the call is successful, you will receive a
-                response like the following: <programlisting>
-{
-  "status": "ACTIVE",
-  "updated": "2013-06-28T15:23:33.092660",
-  "name": "AES key",
-  "algorithm": "AES",
-  "mode": "cbc",
-  "bit_length": 256,
-  "content_types": {
-    "default": "application/octet-stream"
-  },
-  "expiration": "2013-05-08T16:21:38.134160",
-  "secret_ref": "http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/888b29a4-c7cf-49d0-bfdf-bd9e6f26d718",
-}</programlisting>
+                response like the following: <programlisting language="json"><xi:include href="./samples/reqCreateSecretwithoutPayload.json" parse="text"/></programlisting>
                 <note>
                     <para>If you set the <emphasis role="italic"
                             >Accept</emphasis> header to <emphasis
