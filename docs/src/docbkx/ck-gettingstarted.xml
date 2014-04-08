@@ -4,7 +4,7 @@
     xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0"
     xml:id="ck-gettingstarted">
     <?rax canonical.url.base="http://docs.rackspace.com/keep/api/v1.0/ck-gettingstarted/content"?>
-    <title>Rackspace Barbican API Getting Started Guide</title>
+    <title>Rackspace Barbican Getting Started Guide</title>
     <info>
         <author>
             <personname>
@@ -61,39 +61,45 @@
     </chapter>
     <chapter xml:id="Barbican_Overview">
         <title>Rackspace Barbican API Overview</title>
-        <para>Barbican is a REST API that is designed for the secure
-            storage, provisioning and management of secrets. This
-            document provides an introduction into the Barbican API
-            and explains how to do basic API calls. In this guide you
-            will learn the following:</para>
+        <para>Barbican is a REST API that enables secure life-cycle
+            management of keys and credentials, called <emphasis
+                role="italic">secrets</emphasis>, on behalf of
+            customers. This is especially important for customers who
+            want to securely store and retrieve credentials
+            systematically, and enables customers to have keys
+            generated on their behalf based on their requested
+            encryption algorithm and bit length. </para>
+        <para>This document provides an introduction into the Barbican
+            API and explains how to perform basic API calls. </para>
         <para>
             <itemizedlist>
                 <listitem>
-                    <para>Chapter 2 lists the service endpoints that
-                        are available for the Barbican API.</para>
+                    <para>Chapter 2 provides an overview of Barbican
+                        and lists the service endpoints that are
+                        available for the API.</para>
                 </listitem>
                 <listitem>
-                    <para>Chapter 3 teaches how to send requests to
-                        the Barbican API.</para>
+                    <para>Chapter 3 shows you how to send requests to
+                        the API.</para>
                 </listitem>
                 <listitem>
                     <para>Chapter 4 explains how to generate an
                         authentication token.</para>
                 </listitem>
                 <listitem>
-                    <para>Chapter 5 teaches how to make API calls
-                        using cURL. It provides examples how to create
-                        and retrieve secrets and orders.</para>
+                    <para>Chapter 5 shows you how to make API calls by
+                        using cURL. It provides examples of how to
+                        create and retrieve secrets and orders.</para>
                 </listitem>
             </itemizedlist>
         </para>
         <section xml:id="What_is_Barbican">
             <title>What is Barbican?</title>
             <para>Barbican is a REST API designed for the secure
-                storage, provisioning and management of <emphasis
+                storage, provisioning, and management of <emphasis
                     role="italic">secrets</emphasis> through the
-                Secret resource. Barbican supports the following types
-                of secrets:</para>
+                Secrets resource. Barbican supports the following
+                types of secrets.</para>
             <para>
                 <table frame="void">
                     <caption>Secret Types Supported by
@@ -102,71 +108,72 @@
                     <col width="70%"/>
                     <thead>
                         <tr>
-                            <th>Secret Type</th>
+                            <th>Secret type</th>
                             <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Symmetric Keys</td>
-                            <td>Perform reversible encryption of data
-                                at rest, typically using the AES
-                                algorithm set. Symmetric keys are
-                                required to enable features, such as
-                                encrypted Swift containers and Cinder
-                                volumes, encrypted Cloud Backups,
-                                etc.</td>
+                            <td>Symmetric keys</td>
+                            <td>Symmetric keys perform reversible
+                                encryption of data at rest, typically
+                                by using the AES algorithm set.
+                                Symmetric keys are required to enable
+                                features, such as encrypted Cloud
+                                Object Storage containers and Cloud
+                                Block Storage volumes, encrypted Cloud
+                                Backups, and so on.</td>
                         </tr>
                         <tr>
-                            <td>Asymmetric Keys</td>
+                            <td>Asymmetric keys</td>
                             <td>Asymmetric key pairs (sometimes
-                                referred to as public / private keys)
-                                are used in many scenarios where
+                                referred to as public and private
+                                keys) are used in many scenarios where
                                 communication between untrusted
-                                parties is desired. The most common
+                                parties is necessary. The most common
                                 case is with SSL/TLS certificates.
-                                Asymmetric keys but are also used in
+                                Asymmetric keys are also used in
                                 solutions like SSH keys, S/MIME (mail)
-                                encryption and digital
+                                encryption, and digital
                                 signatures.</td>
                         </tr>
                         <tr>
-                            <td>Raw Secrets</td>
-                            <td>Barbican stores secrets as binary
-                                blocks of data (encrypted, naturally).
-                                Clients can use the API to store any
-                                secrets in any format they desire.
-                            </td>
+                            <td>Raw secrets</td>
+                            <td>Barbican stores raw secrets as binary
+                                blocks of data that are encrypted.
+                                Customers can use the API to store any
+                                secrets in any format that they want. </td>
                         </tr>
                     </tbody>
                 </table>
             </para>
-            <para>Barbican also supports the concept of orders. The
-                Orders resource allows you to specify parameters
-                including an encryption algorithm and bit length which
-                are used to generate a random key. The Secrets
-                resource is used for storage of secret data that has
-                already been generated.</para>
+            <para>Barbican also supports the concept of <emphasis
+                    role="italic">orders</emphasis>. The Orders
+                resource enables you to specify parameters, including
+                an encryption algorithm and bit length, which are used
+                to generate a random key. The Secrets resource is used
+                for storage of secret data that has already been
+                generated.</para>
         </section>
         <section xml:id="Prerequisites_Examples">
-            <title>Prerequisites for Running Examples</title>
-            <para>In order to run the examples in this guide, you must
-                have the following: <itemizedlist spacing="compact">
+            <title>Prerequisites for running examples</title>
+            <para>To run the examples in this guide, you must have the
+                following: <itemizedlist spacing="compact">
                     <listitem>
-                        <para>A Rackspace Cloud account</para>
+                        <para>A Rackspace Cloud account.</para>
                     </listitem>
                     <listitem>
                         <para>A Rackspace Cloud username and password,
-                            as specified during registration</para>
+                            as specified during registration.</para>
                     </listitem>
                     <listitem>
-                        <para>The Git client. This is available for
-                            download from  <link
+                        <para>The Git client, which is available for
+                            download from <link
                                 xlink:href="http://git-scm.com/downloads"
                                 >http://git-scm.com/downloads</link>.</para>
                     </listitem>
                     <listitem>
-                        <para>cURL, a command line tool for
+                        <para>cURL, a command-line tool for
                             transferring data with URL syntax. cURL is
                             available for download from: <link
                                 xlink:href="http://curl.haxx.se"
@@ -175,7 +182,7 @@
                 </itemizedlist></para>
         </section>
         <section xml:id="Service_Access_and_Endpoints">
-            <title>Service Access and Endpoints</title>
+            <title>Service access and endpoints</title>
             <para>The following table summarizes the endpoints to use
                 for your Barbican API calls.</para>
             <para>
@@ -198,63 +205,63 @@
                         <tr align="left">
                             <td colspan="2">Chicago (ORD)</td>
                             <td colspan="5"
-                                ><code>https://&lt;https://ord.keep-verify.api.rackspacecloud.com></code></td>
+                                   ><code>https://ord.keep-verify.api.rackspacecloud.com/v1.0/<replaceable>1234</replaceable></code></td>
                         </tr>
                         <tr align="left">
                             <td colspan="2">Dallas/Ft. Worth
                                 (DFW)</td>
                             <td colspan="5"
-                                ><code>https://&lt;https://dfw.keep-verify.api.rackspacecloud.com></code></td>
+                                   ><code>https://dfw.keep-verify.api.rackspacecloud.com/v1.0/<replaceable>1234</replaceable></code></td>
                         </tr>
                         <tr align="left">
                             <td colspan="2">Northern Virgina
                                 (IAD)</td>
                             <td colspan="5"
-                                ><code>https://&lt;https://iad.keep-verify.api.rackspacecloud.com></code></td>
+                                   ><code>https://iad.keep-verify.api.rackspacecloud.com/v1.0/<replaceable>1234</replaceable></code></td>
                         </tr>
                         <tr align="left">
                             <td colspan="2">London (LON)</td>
                             <td colspan="5"
-                                ><code>https://&lt;https://lon.keep-verify.api.rackspacecloud.com></code></td>
+                                   ><code>https://lon.keep-verify.api.rackspacecloud.com/v1.0/<replaceable>1234</replaceable></code></td>
                         </tr>
                         <tr align="left">
                             <td colspan="2">Sydney (SYD)</td>
-                            <td colspan="5">
-                                <code>https://&lt;https://syd.keep-verify.api.rackspacecloud.com></code></td>
+                            <td colspan="5"
+                                   ><code>https://syd.keep-verify.api.rackspacecloud.com/v1.0/<replaceable>1234</replaceable></code></td>
                         </tr>
                         <tr align="left">
                             <td colspan="2">Hong Kong (HKG)</td>
-                            <td colspan="5">
-                                <code>https://&lt;https://hkg.keep-verify.api.rackspacecloud.com></code></td>
+                            <td colspan="5"
+                                   ><code>https://hkg.keep-verify.api.rackspacecloud.com/v1.0/<replaceable>1234</replaceable></code></td>
                         </tr>
                     </tbody>
-                </table>Replace the sample account ID number, 1234,
-                with your actual account number returned as part of
-                the authentication response. Use your actual account
-                number wherever you see the placeholder <emphasis
-                    role="bold">tenantId</emphasis> specified in this
-                guide. </para>
+                </table>Replace the sample account ID number,
+                    <replaceable>1234</replaceable>, with your actual
+                account number returned as part of the authentication
+                response. Use your actual account number wherever you
+                see the placeholder
+                    <replaceable>tenantId</replaceable> specified in
+                this guide. </para>
             <note>
                 <itemizedlist>
                     <listitem>
                         <para>Choose the endpoint from the table for
-                            the datacenter where your Cloud resources
+                            the data center where your Cloud resources
                             are located.</para>
                     </listitem>
                     <listitem>
                         <para>All examples in this guide assume that
-                            you are operating against the DFW
-                            datacenter, however if you are using a
-                            different datacenter, be sure to use the
-                            associated endpoint from the table above
-                            instead.</para>
+                            you are operating against the DFW data
+                            center. If you are using a different data
+                            center, be sure to use the associated
+                            endpoint from the table instead.</para>
                     </listitem>
                 </itemizedlist>
             </note>
         </section>
     </chapter>
     <chapter xml:id="Feeds_Sending_API_Requests">
-        <title>Sending Requests to the API</title>
+        <title>Sending requests to the API</title>
         <para>You have several options for sending requests through an
             API: </para>
         <itemizedlist spacing="compact">
@@ -269,38 +276,38 @@
             </listitem>
             <listitem>
                 <para>If you prefer using a graphical interface, the
-                    REST client for Firefox, also works well for
-                    testing and trying out commands. See <link
+                    REST client for Mozilla Firefox also works well
+                    for testing and trying out commands. See <link
                         xlink:href="https://addons.mozilla.org/en-US/firefox/addon/restclient/"
                         >https://addons.mozilla.org/en-US/firefox/addon/restclient/</link>. </para>
             </listitem>
             <listitem>
-                <para>You can also download and install RESTclient, a
-                    Java application used to test RESTful web
-                    services, from <link
+                <para>You can download and install RESTclient, a Java
+                    application used to test RESTful web services,
+                    from <link
                         xlink:href="http://code.google.com/p/rest-client/"
-                        >http://code.google.com/p/rest-client/</link>.
-                </para>
+                        >http://code.google.com/p/rest-client/</link>. </para>
             </listitem>
         </itemizedlist>
         <section xml:id="Feeds_using-curl-cli">
-            <title>Sending API Requests Using cURL</title>
-            <para>cURL is a command-line tool that is available oin
-                most UNIX-like environments and Apple's Mac OS X
+            <title>Sending API requests using cURL</title>
+            <para>cURL is a command-line tool that is available in
+                most UNIX system-based environments and Apple Mac OS X
                 systems, and can be downloaded for Microsoft Windows
                 to interact with REST interfaces. For more information
-                on cURL, visit <link xlink:href="http://curl.haxx.se/"
+                about cURL, visit <link
+                    xlink:href="http://curl.haxx.se/"
                     >http://curl.haxx.se/</link>. </para>
-            <para>cURL allows you to transmit and receive HTTP
-                requests and responses from the command-line or from
-                within a shell script. This makes it possible to work
-                with the REST API directly without using one of the
-                client APIs. </para>
+            <para>cURL enables you to transmit and receive HTTP
+                requests and responses from the command line or from
+                within a shell script. As a result, you can work with
+                the REST API directly without using one of the client
+                APIs. </para>
             <para>The following cURL command-line options are used in
                 this guide to run the examples.</para>
             <para>
                 <table frame="void">
-                    <caption>cURL Command-Line Options</caption>
+                    <caption>cURL command-line options</caption>
                     <col width="31%"/>
                     <col width="69%"/>
                     <thead>
@@ -329,7 +336,7 @@
                             <td><option>-X</option></td>
                             <td>Specifies the request method to use
                                 when communicating with the HTTP
-                                server.The specified request is used
+                                server. The specified request is used
                                 instead of the default method, which
                                 is GET. For example, <option>-X
                                    PUT</option> specifies to use the
@@ -367,16 +374,15 @@
                                 <para>The carriage returns in the cURL
                                    request examples that are part of
                                    the cURL syntax are escaped with a
-                                   backslash ('\') in order to avoid
-                                   prematurely terminating the
-                                   command. However, you should not
-                                   escape carriage returns inside the
-                                   XMLor JSON message within the
-                                   command.</para>
+                                   backslash (\) to avoid prematurely
+                                   terminating the command. However,
+                                   you should not escape carriage
+                                   returns inside the XML or JSON
+                                   message within the command.</para>
                             </note>
                         </para>
                         <para>Consider the following cURL
-                            authentication tequest: XML example that
+                            authentication tequest: XML example, which
                             is described in detail in <xref
                                 linkend="Generating_Auth_Token"
                             />:</para>
@@ -396,8 +402,8 @@
                         </example>
                         <para>The lines that are part of the cURL
                             command syntax have been escaped with a
-                            backslash ('\') to indicate that the
-                            command continues on the next line:</para>
+                            backslash (\) to indicate that the command
+                            continues on the next line:</para>
                         <screen language="bash"><command>curl</command> <option>-i</option> <option>-d</option> \
 
 
@@ -408,11 +414,11 @@
  &lt;/auth&gt;<option>'</option> \
 <uri>'https://identity.api.rackspacecloud.com/v2.0/tokens'</uri></screen>
                         <para>However the lines
-                                <emphasis>within</emphasis> the xml
+                                <emphasis>within</emphasis> the XML
                             portion of the message are
                                 <emphasis>not</emphasis> escaped with
-                            a backslash ('\') in order to avoid issues
-                            with the XML processing:</para>
+                            a backslash (\), to avoid issues with the
+                            XML processing:</para>
                         <screen language="bash">'&lt;?xml version="1.0" encoding="UTF-8"?>
  &lt;auth&gt;
     &lt;apiKeyCredentials
@@ -434,13 +440,12 @@
                                 role="italic">yourUserName</emphasis>
                             and <emphasis role="italic"
                                 >yourApiKey</emphasis>), paste it into
-                            your terminal window. Then execute the
-                            cURL command by pressing
-                                <guilabel>Enter</guilabel>.</para>
+                            your terminal window. </para>
                         <para>If you have trouble copying and pasting
                             the examples as described, try typing the
                             entire example on one long line, removing
-                            all the backslashes.</para>
+                            all the backslash line-continuation
+                            characters.</para>
                     </listitem>
                     <listitem>
                         <para>Press <guilabel>Enter</guilabel> to run
@@ -451,7 +456,7 @@
         </section>
     </chapter>
     <chapter xml:id="Generating_Auth_Token">
-        <title>Generating an Authentication Token</title>
+        <title>Generating an authentication token</title>
         <para>Whether you use cURL or a REST client to interact with
             the Barbican API, you must generate an authentication
             token. You provide this token in the X-Auth-Token header
@@ -473,12 +478,12 @@
                 </listitem>
                 <listitem>
                     <para><emphasis role="italic"
-                            >yourApiKey</emphasis>  - Your API access
+                            >yourApiKey</emphasis> - Your API access
                         key. You can obtain the key from the Rackspace
                             <link
                             xlink:href="http://mycloud.rackspace.com/"
-                            >Cloud Control Panel</link>) by accessing
-                        selecting <emphasis role="bold">Account
+                            >Cloud Control Panel</link> by selecting
+                            <emphasis role="bold">Account
                             Settings</emphasis> from the <emphasis
                             role="italic">yourAccount</emphasis> menu
                         in the top-right corner of the window. </para>
@@ -486,8 +491,8 @@
             </itemizedlist>
         </para>
         <para> You can use either of the following endpoints to access
-            the Authentication Service, regardless of US or UK
-            identities: </para>
+            the authentication service, which is called Rackspace
+            Cloud Identity, regardless of US or UK identities: </para>
         <itemizedlist spacing="compact">
             <listitem>
                 <para>https://identity.api.rackspacecloud.com/v2.0/</para>
@@ -496,10 +501,10 @@
                 <para>https://lon.identify.api.rackspacecloud.com/v2.0/</para>
             </listitem>
         </itemizedlist>
-        <para> Your account might be based in either the US or the UK;
-            this is not determined by your physical location but by
-            the location of the Rackspace retail site which was used
-            to create your account: </para>
+        <para> Your account might be based in either the US or the UK.
+            The location of your account is not determined by your
+            physical location but by the location of the Rackspace
+            retail site that was used to create your account: </para>
         <itemizedlist spacing="compact">
             <listitem>
                 <para> If your account was created via <link
@@ -515,27 +520,27 @@
             </listitem>
         </itemizedlist>
         <para>Notice that you authenticate by using a special URL for
-            the Cloud authentication service. For example, you may use
+            the Cloud identify service. For example, you can use
                 <code>https://identity.api.rackspacecloud.com/v2.0/tokens</code>,
-            as shown in the following Authenticate Request examples.
-            Note that the <code>v2.0</code> component in the URL
-            indicates that you are using version 2.0 of the Cloud
-            Authentication API.</para>
+            as shown in the following request examples. Note that the
+                <code>v2.0</code> component in the URL indicates that
+            you are using version 2.0 of the Cloud Identity
+            API.</para>
         <note>
-            <para>For UK-based accounts, you may decide to use
-                    <code>'https://lon.identity.api.rackspacecloud.com/v2.0/tokens'</code>
+            <para>For UK-based accounts, you can use
+                    <code>https://lon.identity.api.rackspacecloud.com/v2.0/tokens</code>
                 instead.</para>
         </note>
         <example>
-            <title>cURL Authenticate Request: XML</title>
+            <title>cURL authenticate request: XML</title>
             <?dbfo keep-together="always"?>
             <screen language="bash"><command>curl</command> <option>-i</option> <option>-d</option> \
 '&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;auth>
    &lt;apiKeyCredentials
       xmlns="http://docs.rackspace.com/identity/api/ext/RAX-KSKEY/v1.0"
-         username="<emphasis role="bold">yourUserName</emphasis>"
-         apiKey="<emphasis role="bold">yourApiKey</emphasis>"/>
+         username="<emphasis role="bold"><emphasis role="italic">yourUserName</emphasis></emphasis>"
+         apiKey="<emphasis role="bold"><emphasis role="italic">yourApiKey</emphasis></emphasis>"/>
 &lt;/auth>' \
 <option>-H 'Content-Type: application/xml'</option> \
 <option>-H 'Accept: application/xml'</option> \
@@ -550,42 +555,42 @@
     {
        "RAX-KSKEY:apiKeyCredentials":
        {
-          "username": "<emphasis role="bold">yourUserName</emphasis>",
-          "apiKey": "<emphasis role="bold">yourApiKey</emphasis>"}
+          "username": "<emphasis role="bold"><emphasis role="italic">yourUserName</emphasis></emphasis>",
+          "apiKey": "<emphasis role="bold"><emphasis role="italic">yourApiKey</emphasis></emphasis>"}
     }
 }' \
 <option>-H 'Content-Type: application/json'</option> \
 <uri>'https://identity.api.rackspacecloud.com/v2.0/tokens'</uri></screen>
         </example>
         <para>The authentication token <code>id</code> is returned
-            along with an <code>expires</code> attribute that
-            specifies when the token expires. </para>
+            with an <code>expires</code> attribute that specifies when
+            the token expires. </para>
         <note>
             <itemizedlist spacing="compact">
                 <listitem>
-                    <para>The values that you receive in your
-                        responses vary from the examples shown in this
-                        document because they are specific to your
+                    <para>The values that you receive in your response
+                        vary because they are specific to your
                         account.</para>
                 </listitem>
                 <listitem>
                     <para>The information shown in the authentication
-                        response examples above is for US-based
+                        request examples above is for US-based
                         accounts. If you authenticate against the
-                        UK-endpoint for authorization service, you see
-                        the service catalog information for UK-based
-                        accounts.</para>
+                        UK-endpoint for the authorization service, you
+                        see the service catalog information for
+                        UK-based accounts.</para>
                 </listitem>
                 <listitem>
                     <para> The <code>expires</code> attribute denotes
                         the time after which the token will
                         automatically expire. A token may be manually
                         revoked before the time identified by the
-                        expires attribute; <code>expires</code>
-                        predicts a token's maximum possible lifespan
-                        but does not guarantee that it will reach that
-                        lifespan. Clients are encouraged to cache a
-                        token until it expires.</para>
+                            <code>expires</code> attribute;
+                            <code>expires</code> predicts a token's
+                        maximum possible lifespan but does not
+                        guarantee that it will reach that lifespan.
+                        Clients are encouraged to cache a token until
+                        it expires.</para>
                 </listitem>
                 <listitem>
                     <para>Applications should be designed to
@@ -597,19 +602,19 @@
         </note>
         <para>The actual account number is located after the final
             slash (/) in the <code>publicURL</code> field. In the
-            following examples, the account number is 1100111. You
-            must specify your account number on most of the Barbican
-            API operations, wherever you see the placeholder <emphasis
-                role="bold">tenant id</emphasis> specified in the
-            examples in this guide.</para>
+            response examples in this guide, the account number is
+            123456. You must specify your account number on most of
+            the Barbican API operations, wherever you see the
+            placeholder <emphasis role="bold">tenant id</emphasis>
+            specified in the examples in this guide.</para>
         <para>After authentication, you can use cURL to perform
                 <command>GET</command> and <command>POST</command>
             requests for the Barbican API.</para>
     </chapter>
     <chapter xml:id="Use_Barbican_API">
         <title>Using the Barbican API</title>
-        <para>In this chapter you will learn how to use the Barbican
-            API to do the following:</para>
+        <para>This chaper explains how to use the Barbican API to do
+            the following:</para>
         <para>
             <itemizedlist>
                 <listitem>
@@ -633,9 +638,8 @@
             </itemizedlist>
         </para>
         <section xml:id="Create_a_Secret">
-            <title>Creating an Order to Generate a Secret</title>
-            <para>You need to use the <emphasis role="italic"
-                    >orders</emphasis> resource to generate a secret.
+            <title>Creating an order to generate a secret</title>
+            <para>You use the orders resource to generate a secret.
                 The ordering object encapsulates the workflow and
                 history for the creation of a secret. </para>
             <para>To create an order that generates a secret, complete
@@ -644,80 +648,75 @@
                 <orderedlist>
                     <listitem>
                         <para>Upload a plain-text order by submitting
-                            a <command>POST</command> request as shown
-                            in the following example:</para>
+                            a <command>POST</command> request at a
+                            command-line interface, as shown in the
+                            following example:</para>
                         <para>
                             <programlisting language="json"><xi:include href="./samples/reqCreateOrder.json" parse="text"/></programlisting>
                         </para>
-                    </listitem>
-                    <listitem>
                         <para>If the call is successful, you will
-                            receive a response like the following.
-                            Make sure to record the <emphasis
-                                role="italic">orderId</emphasis> that
-                            is returned in the response. You will use
-                            this id for the next request.</para>
+                            receive a response like the following one:</para>
                         <para>
                             <programlisting> {"order_ref":
-      "http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/orders/62d57f53-ecfe-4ae4-87bd-fab2f24e29bc"} </programlisting>
-                        </para>
+      "https://ord.keep-verify.api.rackspacecloud.com/v1/123456/orders/62d57f53-ecfe-4ae4-87bd-fab2f24e29bc"} </programlisting>
+                        </para></listitem>
+                    <listitem>
+                        <para>Record the order ID that is returned in
+                            the response (in the example,
+                            62d57f53-ecfe-4ae4-87bd-fab2f24e29bc). You
+                            will use this ID for the next
+                            request.</para>
                     </listitem>
                     <listitem>
                         <para>Retrieve the order by typing the
-                            following at a command-line
-                            interface:</para>
+                            following command:</para>
                         <para>
                             <programlisting>curl -H 'Accept: text/plain' &lt;http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId></emphasis>/orders/&lt;<emphasis role="italic">orderId</emphasis>></programlisting>
                         </para>
-                    </listitem>
-                    <listitem>
                         <para>If the call is successful, it will
-                            return a response like the following. Make
-                            sure to record the <emphasis role="italic"
-                                >secretId </emphasis>that is returned
-                            in the response.</para>
+                            return a response like the following
+                            one:</para>
                         <para>
                             <programlisting language="json"><xi:include href="./samples/resCreateSecret.json" parse="text"/></programlisting>
                         </para>
                     </listitem>
+                    <listitem><para>Record the secret ID that is returned in the response (in this
+                            example,
+                            6c3ccd7d-46b6-4ece-9a58-a1be26b2758a). </para></listitem>
                     <listitem>
                         <para>Retrieve the metadata for the generated
-                            secret by typing the following at a
-                            command-line interface:</para>
+                            secret by typing the following
+                            command:</para>
                         <para>
-                            <programlisting>curl -H 'Accept: application/json' &lt;http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/&lt;<emphasis role="italic">secretId</emphasis>></programlisting>
+                            <programlisting>curl -H 'Accept: application/json' https://<replaceable>endpointURL</replaceable>/v1/<replaceable>tenantId</replaceable>/secrets/<replaceable>secretId</replaceable></programlisting>
                         </para>
-                    </listitem>
-                    <listitem>
-                        <para>If the call is successful, it will
-                            return a response like the
-                            following:</para>
+                        <para>If the call is successful, you receive a
+                            response like the following one:</para>
                         <para>
                             <programlisting language="json"><xi:include href="./samples/resRetrieveSecret.json" parse="text"/></programlisting>
                         </para>
-                        <para>The example above shows a secret of type
-                            AES key. The status of the secret is
+                        <para>The example shows a secret of type AES
+                            key. The status of the secret is
                             active.</para>
                     </listitem>
                 </orderedlist>
             </para>
         </section>
         <section xml:id="Retrieve_Order_Status">
-            <title>Retrieving Order Status</title>
+            <title>Retrieve order status</title>
             <para>You can submit a <command>GET</command> request to
-                retrieve the status of an order. The status of an
-                order can be one of the following: ACTIVE, PENDING, or
-                ERROR. </para>
-            <para>To retrieve the order status, type the following at
-                a command-line interface:</para>
+                retrieve the status of an order. An order can have one
+                of the following statuses: ACTIVE, PENDING, or ERROR. </para>
+            <para>To retrieve the order status, type the following
+                command:</para>
             <para>
-                <programlisting>curl -H 'Accept: application/json' &lt;http://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId></emphasis>/orders/&lt;<emphasis role="italic">orderId</emphasis>></programlisting>
+                <programlisting>curl -H 'Accept: application/json' &lt;http://<replaceable>endpointURL</replaceable>/v1/<replaceable>tenantId</replaceable>/orders/<replaceable>orderId</replaceable></programlisting>
             </para>
             <para>The following example shows an order with an ACTIVE
                 status:
                 <programlisting>{
     "status": "ACTIVE",
-    "secret_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/secrets/8a78d5e4-524a-4e81-96cc-c7d16ed85515",
+    "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/123456/secrets/8a78d5e4-524a-4e81-96cc-c7d16ed85515",
     "updated": "2014-04-02T14:52:26.987458",
     "created": "2014-04-02T14:52:26.921043",
     "secret": {
@@ -728,13 +727,14 @@
         "bit_length": 256,
         "mode": "cbc"
          },
-    "order_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantID</emphasis>>/orders/b63d2c05-5d53-4db6-af06-4e388044deb8"
+    "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/123456/orders/b63d2c05-5d53-4db6-af06-4e388044deb8"
 }</programlisting>The
-                following example shows an order with status set to
-                PENDING:</para>
+                following example shows an order with the status set
+                to PENDING. Note that a secret ID is not returned, but
+                in its place is a series of question marks.</para>
             <para><programlisting>{
      "status": "PENDING",
-     "secret_ref": &lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/????",
+     "secret_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/123456/secrets/????",
      "updated": "2014-03-19T22:40:06.720872",
      "created": "2014-03-19T22:40:06.720860",
      "secret": {
@@ -745,22 +745,15 @@
             "bit_length": 256,
             "mode": "cbc"
              },
-            "order_ref": "https://&lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/orders/94ade532-9657-41e1-87ae-c8cbdfa836e0"
+            "order_ref": "https://ord.keep-verify.api.rackspacecloud.com/v1/123456/orders/94ade532-9657-41e1-87ae-c8cbdfa836e0"
  }</programlisting></para>
-            <para>The above example shows that in an order with status
-                set to PENDING, no <emphasis role="italic">secretId
-                </emphasis>is returned but instead a series of
-                questions marks:</para>
-            <para>
-                <programlisting>"secret_ref": &lt;<emphasis role="italic">endpointURL</emphasis>>/v1/&lt;<emphasis role="italic">tenantId</emphasis>>/secrets/????"</programlisting>
-            </para>
         </section>
         <section xml:id="Store_a_Secret">
-            <title>Storing a Secret</title>
+            <title>Storing a secret</title>
             <para>You can use the secrets resource to store a secret
                 in the database.</para>
-            <para>You can store secrets using one of the 2
-                methods:</para>
+            <para>You can use one of the following methods to store a
+                secret:</para>
             <para>
                 <itemizedlist>
                     <listitem>

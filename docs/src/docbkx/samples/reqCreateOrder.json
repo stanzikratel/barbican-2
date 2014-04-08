@@ -6,7 +6,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 		 "algorithm": "aes",
 		 "bit_length": 256,
 		 "mode": "cbc",
-		 "payload_content_type": "application/octet-stream"
+		 "payload": "here's my secret",
+		 "payload_content_type": "application/octet-stream",
+		 "payload_content_encoding": "base64"
 		}
 }'\
-http://<endpointURL>/v1/<tenantId>/orders
+https://endpointURL/v1/tenantId/orders

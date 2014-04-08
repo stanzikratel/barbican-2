@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<book
-    xmlns="http://docbook.org/ns/docbook"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:xi="http://www.w3.org/2001/XInclude"
-    xmlns:svg="http://www.w3.org/2000/svg"
-    version="5.0"
-    xml:id="ck-devguide"
-    status="DRAFT">
+<book xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:svg="http://www.w3.org/2000/svg" version="5.0"
+  xml:id="ck-devguide" status="DRAFT">
   <?rax canonical.url.base="http://docs.rackspace.com/keep/api/v1.0/ck-devguide/content"?>
   <title>Rackspace Barbican API Developer Guide</title>
   <info>
@@ -15,7 +12,8 @@
       <holder>Rackspace US, Inc.</holder>
     </copyright>
     <releaseinfo>API v1.0</releaseinfo>
-    <productname>Rackspace Barbican API</productname><!--Note that the <productname> text matches the first few words of the title. The build system splits the title into productname + rest of title on the pdf cover.-->
+    <productname>Rackspace Barbican API</productname>
+    <!--Note that the <productname> text matches the first few words of the title. The build system splits the title into productname + rest of title on the pdf cover.-->
     <pubdate><!--If you leave the <pubdate> element empty, the build system inserts today's date automatically. --></pubdate>
     <revhistory>
       <revision>
@@ -31,7 +29,8 @@
     </revhistory>
     <legalnotice role="rs-api">
       <annotation>
-        <remark>Copyright details are filled in by the build system.</remark>
+        <remark>Copyright details are filled in by the build
+          system.</remark>
       </annotation>
     </legalnotice>
     <!--
@@ -39,11 +38,11 @@
        Work with the Cloud Doc Tools team to find out what to put here. Once established, you should not change these
        values without first consulting with the CDT team.
     -->
-      <raxm:metadata xmlns:raxm="http://docs.rackspace.com/api/metadata">
-        <raxm:displayname>API Developer Guide</raxm:displayname>
-        <raxm:product version="v1.0">keep</raxm:product>
-        <raxm:priority>20</raxm:priority>
-      </raxm:metadata>
+    <raxm:metadata xmlns:raxm="http://docs.rackspace.com/api/metadata">
+      <raxm:displayname>API Developer Guide</raxm:displayname>
+      <raxm:product version="v1.0">keep</raxm:product>
+      <raxm:priority>20</raxm:priority>
+    </raxm:metadata>
   </info>
   <preface xml:id="preface">
     <title>Preface</title>
@@ -53,6 +52,18 @@
         interested in developing applications using the Rackspace
         Barbican Application Programming Interface
           (<abbrev>API</abbrev>). </para>
+    </section>
+    <section xml:id="Additional_Resources">
+      <title>Additional Resources</title>
+      <para>You can find additional information about Barbican at 
+        https://github.com/
+        rackspace-heat-templates
+        .
+        For information about Rackspace services, refer to
+        http://docs.rackspace.com
+        .
+        Issues and bug reports can be directed to your support team via ticket, chat, email, or
+        phone.</para>
     </section>
     <section xml:id="change_history">
       <title>Document Change History</title>
@@ -80,28 +91,23 @@
           <title>Barbican API Architecture</title>
           <mediaobject>
             <imageobject>
-              <imagedata fileref="images/Barbican_architecture.png" contentwidth="6in" align="left"/>
+              <imagedata fileref="images/Barbican architecture drawing.png"
+                contentwidth="7in" align="left"/>
             </imageobject>
           </mediaobject>
         </figure>
       </para>
       <para>The Barbican API architecture consists of several API
-        node(s) which handle incoming REST requests to Barbican. These
+        nodes, which handle incoming REST requests to Barbican. These
         nodes can interact with the database directly if the request
-        can be completed synchronously (such as for GET requests),
-        otherwise the queue supports asynchronous processing by worker
+        can be completed synchronously, such as for GET requests.
+        Otherwise the queue supports asynchronous processing by worker
         nodes. </para>
-      <para>The latter could include interactions with third parties
-        such as certificate authorities. As implied in the diagram,
-        the architecture supports multiple API and worker nodes being
-        added/removed to/from the network, to support advanced
-        features such as auto scaling. Eventually, the database could
-        be replicated across data centers supporting region-agnostic
-        storage and retrieval of secured information, albeit with lags
-        possible during data synchronization. Also note that detailed
-        audit information will be written to the database as well,
-        capturing a history of actions that change the state of the
-        system. </para>
+      <para>Asynchronous processing can include interactions with
+        third parties such as certificate authorities. Barbican
+        supports multiple API and worker nodes being added/removed
+        to/from the network to support advanced features such as auto
+        scaling. </para>
     </section>
   </chapter>
   <chapter xml:id="other-features">
@@ -512,73 +518,67 @@ config at https://github.com/rackerlabs/autoscaling-chef/blob/master/site-cookbo
       </section>
     </section>
   </chapter>
-<!--  <xi:include href="./chapters/rbac.xml"/>-->
+  <!--  <xi:include href="./chapters/rbac.xml"/>-->
   <chapter xml:id="Integration_Environment">
     <title>Integration Environment</title>
-    <para>We have set up an <emphasis role="bold"
-      >insecure</emphasis> integration environment at <link
+    <para>We have set up an <emphasis role="bold">insecure</emphasis>
+      integration environment at <link
         xlink:href="http://iad-int-api.cloudkeep.io:9311"
-        >http://iad-int-api.cloudkeep.io:9311</link> so that
-      you can try the Barbican API without having to install and
-      configure it first. </para>
+        >http://iad-int-api.cloudkeep.io:9311</link> so that you can
+      try the Barbican API without having to install and configure it
+      first. </para>
     <para>
       <warning>
-        <para>This endpoint is provided for evaluation
-          purposes only, with no attempt made to secure or
-          persist data stored therein. Therefore, please do
-          not store any data that is sensitive, critical or
-          that you otherwise care about.</para>
+        <para>This endpoint is provided for evaluation purposes only,
+          with no attempt made to secure or persist data stored
+          therein. Therefore, please do not store any data that is
+          sensitive, critical or that you otherwise care about.</para>
       </warning>
     </para>
     <para>
       <note>
-        <para> Authentication is currently turnd off or the
+        <para> Authentication is currently turned off or the
           integration environment. </para>
       </note>
     </para>
     <section xml:id="Obtaining_Barbican_Version_Resource">
       <title>Obtaining a Barbican Version Resource</title>
-      <para>First, you need to generate a valid token on
-        keystone. The integration environment provides a
-        Keystone server at http://keystone-int.cloudkeep.io as
-        shown in the following example:</para>
+      <para>First, you need to generate a valid token on keystone. The
+        integration environment provides a Keystone server at
+        http://keystone-int.cloudkeep.io as shown in the following
+        example:</para>
       <para>
         <programlisting language="json"><xi:include href="../wadl/samples/reqGenerateToken.json" parse="text"/></programlisting>
       </para>
-      <para>If successful, this request will return the
-        following response, which contains the token
-        information:</para>
+      <para>If successful, this request will return the following
+        response, which contains the token information:</para>
       <programlisting language="json"><xi:include href="./samples/resgenerateToken.json" parse="text"/></programlisting>
-      <para>From the response you need to record the following
-        two values:</para>
+      <para>From the response you need to record the following two
+        values:</para>
       <para>
         <itemizedlist>
           <listitem>
-            <para><emphasis role="italic">Token
-              id</emphasis>, which is
-              39a8b7f62dcb4095a74a4e65a68c85d8 in the
-              example above.</para>
+            <para><emphasis role="italic">Token id</emphasis>, which
+              is 39a8b7f62dcb4095a74a4e65a68c85d8 in the example
+              above.</para>
           </listitem>
           <listitem>
-            <para><emphasis role="italic">Tenant
-              id</emphasis>, which is
-              0239200f037f4520aadd9791fad19af8 in the
-              example above.</para>
+            <para><emphasis role="italic">Tenant id</emphasis>, which
+              is 0239200f037f4520aadd9791fad19af8 in the example
+              above.</para>
           </listitem>
         </itemizedlist>
       </para>
       <para>
         <note>
-          <para>For PKI-authenticated Keystone
-            configurations, the token id value will be
-            much larger.</para>
+          <para>For PKI-authenticated Keystone configurations, the
+            token id value will be much larger.</para>
         </note>
       </para>
-      <para>After you have obtained the token, you can use it to
-        make a requests to the Barbican API using the
-        integration environment. The following example shows
-        how to make a request for version information from
-        Barbican:</para>
+      <para>After you have obtained the token, you can use it to make
+        a requests to the Barbican API using the integration
+        environment. The following example shows how to make a request
+        for version information from Barbican:</para>
       <para>
         <programlisting language="json"><xi:include href="./samples/reqgetversioninfo.json" parse="text"/></programlisting>
       </para>
@@ -618,25 +618,26 @@ config at https://github.com/rackerlabs/autoscaling-chef/blob/master/site-cookbo
             whereby Barbican generates the secret information.</para>
         </note>
       </para>
-      <section xml:id="Examples_of_Secrets"><title>Examples of Secret Combinations</title>
-      <para>The tables in this section are focused on the
+      <section xml:id="Examples_of_Secrets">
+        <title>Examples of Secret Combinations</title>
+        <para>The tables in this section are focused on the
           content-types and content-encodings of the various REST verb
           flows, even though each flow might have a different way to
           specify these values (either via http header settings or
-          JSON request field). The reason for this approach is that
-          while each flow has a different means to specify the
-          mime-type and encoding, the values set for them must still
-          be consistent with valid mime-type or encoding
-          selections.</para>
+          JSON request field). </para>
+        <para>The reason for this approach is that while each flow has
+          a different means to specify the mime-type and encoding, the
+          values set for them must still be consistent with valid
+          mime-type or encoding selections.</para>
         <para/>
         <para>
-            <table rules="all">
+          <table rules="all" width="883">
             <caption>One-Step UTF-8/ACII Secret
               Create/Retrieve</caption>
-            <col width="25%"/>
-            <col width="25%"/>
-            <col width="25%"/>
-            <col width="25%"/>
+            <col width="21%"/>
+            <col width="24%"/>
+            <col width="21%"/>
+            <col width="34%"/>
             <thead>
               <tr>
                 <th>Action</th>
@@ -653,7 +654,7 @@ config at https://github.com/rackerlabs/autoscaling-chef/blob/master/site-cookbo
                 <td>Supplied payload is encrypted</td>
               </tr>
               <tr>
-                <td>GET secrets (meta)</td>
+                <td>GET secrets (metadata)</td>
                 <td>Accept: application/json</td>
                 <td>Not required/ignored</td>
                 <td>JSON metadata, with content-type set to
@@ -707,9 +708,7 @@ config at https://github.com/rackerlabs/autoscaling-chef/blob/master/site-cookbo
             </tr>
           </tbody>
         </table>
-        <para>
-
-        </para>
+        <para> </para>
         <para>
           <table rules="all">
             <caption>Two-Step Binary Secret Create/Retrieve</caption>
@@ -737,7 +736,7 @@ config at https://github.com/rackerlabs/autoscaling-chef/blob/master/site-cookbo
                   determine the secret's content type</td>
               </tr>
               <tr>
-                <td>GET secrets (meta)</td>
+                <td>PUT secrets</td>
                 <td>Content-type: application/octet-stream</td>
                 <td>Content-Encoding: base64</td>
                 <td>Supplied request body is <emphasis role="italic"
@@ -828,18 +827,16 @@ config at https://github.com/rackerlabs/autoscaling-chef/blob/master/site-cookbo
         workflow and history for the creation of a secret. This
         interface is implemented as an asynchronous process since the
         time to generate a secret can vary depending on the type of
-        secret. </para></section></chapter>
-
-  <chapter xml:id="volume"
-    xmlns="http://docbook.org/ns/docbook"
-    role="api-reference" >
+        secret. </para>
+    </section>
+  </chapter>
+  <chapter xml:id="volume" xmlns="http://docbook.org/ns/docbook"
+    role="api-reference">
     <title>API Operations</title>
     <para>This chapter describes each of the operations. The following
       table summarizes all of the operations that are
       available:</para>
-    <wadl:resources
-        href="../wadl/Barbican.wadl"
-        xmlns:wadl="http://wadl.dev.java.net/2009/02"/>
+    <wadl:resources href="../wadl/Barbican.wadl"
+      xmlns:wadl="http://wadl.dev.java.net/2009/02"/>
   </chapter>
-
 </book>
