@@ -770,6 +770,71 @@
 }</programlisting>
             </para>
         </section>
+        <section xml:id="Two_step_secret_creation"><title>Creating a secret using two-step storage</title><para>You can use a two-step secret storage process when secret data
+                cannot be easily provided inside the JSON data in a
+                one-step secret storage. </para>
+            <para>
+                <orderedlist>
+                    <listitem>
+                        <para>To follow the two-step process, first
+                            create the secret metadata in Barbican by
+                            sending a <command>POST</command> request
+                            as shown in the following example:</para>
+                        <para>
+                            <programlisting>curl -i -H 'Content-Type: application/json' -d '{"name": "Binary Key File"}' http://<replaceable>endpointURL</replaceable>/v1/12345/secrets</programlisting>
+                        </para>
+                        <para>If the call is successfull, you receive
+                            a <code>200 OK</code> response as shown in
+                            the following example:</para>
+                        <para>
+                            <programlisting>HTTP/1.1 201 Created                                                               
+Content-Length: 93                                                                 
+Content-Type: application/json; charset=utf-8                                      
+Location: http://<replaceable>endpointURL</replaceable>/12345/secrets/a83018d1-e657-4957-9ddd-42a479753e6b
+x-openstack-request-id: req-ea090bd4-5bfc-47ae-a388-746485d947f1
+                                                                                   
+{
+  "secret_ref": "http://<replaceable>endpointURL/</replaceable>v1/12345/secrets/a83018d1-e657-4957-9ddd-42a479753e6b”
+}
+</programlisting>
+                        </para>
+
+            <para>The secret metadata is now stored in Barbican. You
+                            still need to provide the actual secret,
+                            therefore be sure to save the
+                                   <code><parameter>secret_ref</parameter></code>
+                            information as you will need it for
+                            uploading the secret data.</para></listitem>
+                    <listitem> <para>Next, create a
+                            file with random data to be used as a
+                            secret key file. The following command
+                            creates a 5KB file that contains random
+                            data in the current directory:</para>
+            <para>
+                <programlisting>dd if=/dev/random of=secret_key_file count=5 bs=1024</programlisting>
+            </para></listitem>
+            <listitem><para>Next, submit a <command>PUT</command> request that includes the
+                            secret key file you just created as sghown
+                            in the following example:</para>
+            <para>
+                <programlisting>curl -i -X PUT -H 'Content-Type: application/octet-stream’ \ 
+     -T ./secret_key_file http://<replaceable>endpointURL</replaceable>/v1/12345/secrets/a83018d1-e657-4957-9ddd-42a479753e6b
+</programlisting>
+            </para></listitem>
+            <listitem><para>Barbican encrypts and stores the secret key file, associates it
+                            with the previously created metadata, and
+                            responds with an empty <code>200 OK</code>
+                            message as shown in the following
+                            example:</para>
+            <para>
+                <programlisting>HTTP/1.1 200 OK Content-Length: 0 x-openstack-request-id: req-ab107dce-adfd-4b8d-b9eb-7095f8cf9b15</programlisting>
+            </para></listitem>
+            </orderedlist></para>
+            <para>Now you can use a <command>GET</command> request to
+                retrieve the secret, as explained in <link
+                    linkend="Retrieve_Secret">Retrieving a
+                    secret.</link></para>
+        </section>
     </chapter>
     <chapter xml:id="Barbican_Next_Steps">
         <title>Next steps</title>

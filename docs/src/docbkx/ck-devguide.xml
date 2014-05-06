@@ -411,8 +411,8 @@
                   <td><code>Accept</code> header set to
                       <code>application/octet-stream</code></td>
                   <td>Not required/ignored</td>
-                  <td>The revious request is decrypted and returned as
-                    raw binary.</td>
+                  <td>The previous request is decrypted and returned
+                    as raw binary.</td>
                 </tr>
               </tbody>
             </table>
@@ -462,8 +462,8 @@
                 </tr>
                 <tr>
                   <td><command>PUT </command></td>
-                  <td><parameter>Content-Type</parameter> header is
-                    set to<code>text/plain</code>.</td>
+                  <td><code>Content-Type</code> header is set to
+                      <code>text/plain</code>.</td>
                   <td>Not required/ignored</td>
                   <td>Supplied request body is encrypted as is.</td>
                 </tr>
@@ -498,6 +498,73 @@
         interface is implemented as an asynchronous process since the
         time to generate a secret can vary depending on the type of
         secret. </para>
+      <para>The following shows an example of an order:</para>
+      <para>
+        <programlisting>{
+    "status": "ACTIVE",
+    "secret_ref": "https://endpointURL/v1/12345/secrets/0b759c30-8ed2-4c3e-ab7d-6320f9655e60",
+    "updated": "2014-05-02T18:02:44.381024",
+    "created": "2014-05-02T18:02:44.297474",
+    "secret": {
+        "name": "secretname",
+        "algorithm": "aes",
+        "payload_content_type": "application/octet-stream",
+        "expiration": null,
+        "bit_length": 256,
+        "mode": "cbc"
+    },
+    "order_ref": "https://endpointURL/v1/12345/orders/18e3f713-ddf0-4c49-99c4-76794e65c870"
+}</programlisting>
+      </para>
+      <para>An order consists of the following elements:</para>
+      <para>
+        <table rules="all">
+          <caption>Elements of an order</caption>
+          <col width="15%"/>
+          <col width="85%"/>
+          <thead>
+            <tr>
+              <th>Element</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>secret</td>
+              <td>Lists all the secret parameters provided in the
+                original order request. </td>
+            </tr>
+            <tr>
+              <td>order_ref</td>
+              <td>Specifies the URI pointing to the order.</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>Specifis the status of the order. Can be
+                  <code>PENDING</code>, <code>ACTIVE</code> or
+                  <code>ERROR</code>. </td>
+            </tr>
+            <tr>
+              <td>secret_ref</td>
+              <td>Specifies the URI to the secret <emphasis
+                  role="italic">once it is generated</emphasis>. This
+                field is not available unless the status is
+                  <code>ACTIVE</code>.</td>
+            </tr>
+            <tr>
+              <td>error_status_code</td>
+              <td>Optional. Specifies the HTTP-style status code of
+                the root cause error condition, only if the status is
+                  <code>ERROR</code>.</td>
+            </tr>
+            <tr>
+              <td>error_reason</td>
+              <td>Optional. Provides details of the root cause of the
+                error, only if the status is <code>ERROR</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </para>
       <section xml:id="Generating_Order">
         <title>Generating an order</title>
         <para>This section describes how to generate an order throught
@@ -632,8 +699,8 @@
             <para>The token's <code>expires</code> attribute denotes
               the time after which the token automatically becomes
               invalid. A token can be manually revoked before the time
-              identified by the <code>expires</code> attribute.
-                The<code>expires</code> attribute predicts a token's
+              identified by the <code>expires</code> attribute. The
+                <code>expires</code> attribute predicts a token's
               maximum possible lifespan but does not guarantee that it
               will reach that lifespan. Users are encouraged to cache
               a token until it expires. </para>

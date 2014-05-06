@@ -9,4 +9,5 @@ curl -X POST -d \
 		 "payload_content_type": "application/octet-stream"
 		}
 }'\
-https://endpointURL/v1/tenantID/orders
+https://endpointURL/v1/12345/orders
+
