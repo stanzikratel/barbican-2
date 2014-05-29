@@ -502,7 +502,7 @@
       <para>
         <programlisting>{
     "status": "ACTIVE",
-    "secret_ref": "https://endpointURL/v1/12345/secrets/0b759c30-8ed2-4c3e-ab7d-6320f9655e60",
+    "secret_ref": "https://<replaceable>endpointURL</replaceable>/v1/12345/secrets/0b759c30-8ed2-4c3e-ab7d-6320f9655e60",
     "updated": "2014-05-02T18:02:44.381024",
     "created": "2014-05-02T18:02:44.297474",
     "secret": {
@@ -513,7 +513,7 @@
         "bit_length": 256,
         "mode": "cbc"
     },
-    "order_ref": "https://endpointURL/v1/12345/orders/18e3f713-ddf0-4c49-99c4-76794e65c870"
+    "order_ref": "https://<replaceable>endpointURL</replaceable>/v1/12345/orders/18e3f713-ddf0-4c49-99c4-76794e65c870"
 }</programlisting>
       </para>
       <para>An order consists of the following elements:</para>
