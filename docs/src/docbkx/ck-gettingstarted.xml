@@ -647,9 +647,9 @@
                         for text-based secrets. </para>
                 </important></para>
         </section>
-        <section xml:id="Generate_an_AES_Key">
+        <section xml:id="Retrieve_multiple_secrets">
             <title>Retrieving a list of stored secrets</title>
-            <para>Youcan retrieve a list of secrets that are
+            <para>You can retrieve a list of secrets that are
                 associated with a given tenant by typing the following
                 command:</para>
             <para>
